@@ -8,6 +8,7 @@ import Dashboard from '@/pages/Dashboard/Dashboard';
 import SupervisorDashboard from '@/pages/SupervisorDashboard/SupervisorDashboard';
 // Maps
 import MapPage from '@/pages/Maps/Map/Map';
+import RouteAnalysis from './pages/Maps/RouteAnalysis/RouteAnalysis.vue'
 import PlaybackPage from '@/pages/Maps/Playback/Playback';
 
 //Genisys
@@ -124,6 +125,11 @@ export default new Router({
                             return next();
                         }
                     }
+                },
+                {
+                    path: 'maps/routeAnalysis',
+                    name: 'RouteAnalysisPage',
+                    component: RouteAnalysis,
                 },
                 // Trailer
                 {

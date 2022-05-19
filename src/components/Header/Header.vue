@@ -8,6 +8,7 @@
           <div v-for="row in menuList" :key="row.menuId">
             <b-nav-item v-if="Object.keys(row.subMenu).length < 1" class="d-md-down-none" :to="row.menuLinkUrl">
               <i v-if="row.menuId == 1 || row.menuId == 11" class="la la-home" />
+              <!-- <i v-if="row.menuId" class="la la-map" /> -->
               <i v-if="row.menuId == 3 || row.menuId == 8 || row.menuId == 10" class="la la-truck" />
               &nbsp; {{row.menuTitle}}
             </b-nav-item> 

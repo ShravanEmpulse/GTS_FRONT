@@ -37,7 +37,7 @@
                 <b-form-input placeholder="" v-model="search_input" maxlength="30"  @keyup.enter="showSearchTrailer()"/>    
                 <b-input-group-append>    
                      <b-button variant="default" class="mr-xs" size="md" @click="showSearchTrailer()">Search</b-button>
-                </b-input-group-append>    
+                </b-input-group-append>
                 </b-input-group>    
         </b-col>   
         

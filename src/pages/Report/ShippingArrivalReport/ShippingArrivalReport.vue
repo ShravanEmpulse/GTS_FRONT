@@ -94,6 +94,7 @@ export default {
           arrivalDate: 'Please click the below column to select the date range.'
 		  	},
         requestAdapter: function(data) {
+          console.log(data);
           return {
             ascending: data.ascending,
             byColumn: data.byColumn,

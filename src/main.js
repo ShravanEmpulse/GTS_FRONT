@@ -47,6 +47,8 @@ Vue.use(VueGoogleMaps, {
     load: {
         // real
         key: 'AIzaSyAauVHG8HoC4meNjIbklXIT4DG0lTlF20w',
+        libraries: 'places',
+        installComponents: true
         // local
         // key: 'AIzaSyB7OXmzfQYua_1LEhRdqsoYzyJOPh9hGLg',
         //selfsigned

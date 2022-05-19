@@ -172,6 +172,7 @@ export default {
     },
     getReportData(){
       this.$refs.reportTable.getData();
+      console.log(this.$refs.reportTable.getData());
     }
   },
     mounted(){

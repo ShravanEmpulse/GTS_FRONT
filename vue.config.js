@@ -8,9 +8,18 @@ module.exports = {
         proxy: {
             '/v1/*': {
                 // target:'http://localhost:9200',
-                target: 'http://192.168.5.192:9200',
-                changeOrigin: true
+                // target: 'http://192.168.5.192:9200',
+                target:'http://10.110.203.194:8989/backoffice',
+                changeOrigin: true,
+                // pathRewrite: {'/backoffice' : ''}
             },
+            // '/v1/*': {
+            //     // target:'http://localhost:9200',
+            //     // target: 'http://192.168.5.192:9200',
+            //     target:'http://10.110.203.194:8989/routes',
+            //     changeOrigin: true,
+            //     pathRewrite: {'/route' : ''}
+            // },
         }
     }
 }
