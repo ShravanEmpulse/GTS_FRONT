@@ -396,6 +396,7 @@ export default {
                         lng: response.data.resultBody[i].longitude,
                     });
                 }
+                // console.log(this.path);
 
                 if(response.data.resultBody.length==0){
                     this.showInfoAlert(this.NoGPSData);

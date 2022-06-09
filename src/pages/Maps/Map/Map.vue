@@ -56,6 +56,7 @@ import Widget from '@/components/Widget/Widget';
 import Detail from './Detail/Detail';
 import GmapCluster from 'vue2-google-maps/dist/components/cluster'
 import vSelect from 'vue-select';
+// import { gmapApi as googleMapsApi } from 'vue2-google-maps';
 
 export default {
     components: { Widget, Detail, GmapCluster, vSelect },
@@ -155,7 +156,8 @@ export default {
                 for (let m of markers) {
                     bounds.extend(m.latLng)
                 }
-                this.$refs.map.fitBounds(bounds)
+                console.log(this.$refs.map);
+                this.$refs.map.fitBounds(bounds);
             }
         }
     },
@@ -165,7 +167,8 @@ export default {
                 width: this.mapSize.width + '%',
                 height: this.mapSize.height + 'rem'
             }
-        }
+        },
+        // google: googleMapsApi
     },
     methods: {
         showInfoAlert(textMessage) {

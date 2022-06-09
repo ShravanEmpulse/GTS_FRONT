@@ -6,7 +6,12 @@ import layout from './layout';
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
-    layout,
+    modules:{
+        layout:{
+            namespaced:true
+        }
+        
+    }
 
 })
 

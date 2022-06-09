@@ -85,7 +85,7 @@
                       :placeholder="placeholderText"
                       :sort-value-by="sortValueBy" 
                       :value-consists-of="valueConsistsOf"
-                      :max-height="290"/>
+                      :max-height="230"/>
                 </b-form-group>
               </div>
               <hr>

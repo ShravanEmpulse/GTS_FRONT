@@ -87,6 +87,8 @@ export default {
           total: 'TOTAL (KM)'
         },
         requestAdapter: (data) => {
+          console.log(this.start);
+          console.log(this.end);
           const startDate =  this.$moment(this.start).format('YYYYMMDD');
           const endDate =  this.$moment(this.end).format('YYYYMMDD')
           return {
@@ -102,6 +104,7 @@ export default {
           };
         },
         requestFunction: function (data) {
+          console.log(data);
           return this.$axios.get('/api/report/deliveryDistanceReport', {
                 params: data
           }).catch(function (e) {
@@ -169,6 +172,7 @@ export default {
     init(start, end){
       this.start = this.$moment(start).format('YYYYMMDD');
       this.end = this.$moment(end).format('YYYYMMDD');
+      console.log(this.start, this.end);
     },
     getReportData(){
       this.$refs.reportTable.getData();
@@ -197,6 +201,7 @@ export default {
           format: 'DD MMM, YYYY'
         },
       }, function(start, end, label) {
+          console.log(start, end);
           onDateSelected(start, end);
       });
 

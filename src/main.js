@@ -46,14 +46,17 @@ Vue.use(BootstrapVue);
 Vue.use(VueGoogleMaps, {
     load: {
         // real
-        key: 'AIzaSyAauVHG8HoC4meNjIbklXIT4DG0lTlF20w',
+        // key: 'AIzaSyAauVHG8HoC4meNjIbklXIT4DG0lTlF20w',
         libraries: 'places',
-        installComponents: true
+        // installComponents: true,
         // local
-        // key: 'AIzaSyB7OXmzfQYua_1LEhRdqsoYzyJOPh9hGLg',
+        key: 'AIzaSyAjblGXuplG4T7f3iPxn5NuGulNrQisKno',
+        // key:'AIzaSyAtPIjMAMPjfVHJAgZI_8ng13s9e0LUDa0',
         //selfsigned
         // key:'AIzaSyBsX789VROph3aBUcKDTu85QWjORappU-s'
+        v:3.49
     },
+    installComponents: true,
 });
 
 Vue.use(VCalendar, {
@@ -86,10 +89,39 @@ Vue.component('loading', loading);
 Vue.component('apexchart', VueApexCharts);
 
 axios.defaults.baseURL = '/v1'
+// import axios from "axios";
+    
+// For common config
+// axios.defaults.headers.post["Content-Type"] = "application/json";
+    
+// const backofficeAxios = axios.create({
+//     baseURL: '/backoffice'
+// });
+    
+const routesAxios = axios.create({
+    baseURL: '/routes',
+});
+    
+    
+export {
+    
+    routesAxios
+};
 axios.defaults.headers.common.Accept = 'application/json;charset=UTF-8'
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8'
 
 axios.interceptors.request.use(
+    config => {
+        if (window.sessionStorage.getItem('Dorothy-Auth-Token')) {
+            config.headers.common['Dorothy-Auth-Token'] = window.sessionStorage.getItem('Dorothy-Auth-Token');
+        }
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+)
+routesAxios.interceptors.request.use(
     config => {
         if (window.sessionStorage.getItem('Dorothy-Auth-Token')) {
             config.headers.common['Dorothy-Auth-Token'] = window.sessionStorage.getItem('Dorothy-Auth-Token');
@@ -127,6 +159,7 @@ axios.interceptors.response.use(
 )
 
 Vue.prototype.$axios = axios;
+Vue.prototype.$routesAxios = routesAxios;
 
 ES6Promise.polyfill()
 

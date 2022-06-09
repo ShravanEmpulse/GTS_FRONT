@@ -32,6 +32,14 @@
     padding-left: .85rem;
     color: $gray-600;
 }
+.fa-train:before {
+    content: "\F238";
+    font-size: 16px;
+}
+
+.fa-cloud::before{
+    font-size: 16px;
+}
 
 .avatar {
     margin-top: -7px;

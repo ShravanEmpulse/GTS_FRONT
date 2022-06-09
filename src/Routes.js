@@ -10,6 +10,8 @@ import SupervisorDashboard from '@/pages/SupervisorDashboard/SupervisorDashboard
 import MapPage from '@/pages/Maps/Map/Map';
 import RouteAnalysis from './pages/Maps/RouteAnalysis/RouteAnalysis.vue'
 import PlaybackPage from '@/pages/Maps/Playback/Playback';
+import RouteWeather from '@/pages/Routes/Weather/RouteWeather';
+import AlternateRoute from '@/pages/Routes/AlternateRoute/AlternateRoute';
 
 //Genisys
 import GenisysMapPage from '@/pages/Genisys/GenisysMap/GenisysMap';
@@ -20,11 +22,15 @@ import GenisysPlaybackPage from '@/pages/Genisys/GenisysPlayback/GenisysPlayback
 import DomesticMapPage from '@/pages/Domestic/DomesticMap/DomesticMap';
 import DomesticTrailerPage from '@/pages/Domestic/DomesticTrailer/DomesticTrailer';
 import DomesticPlaybackPage from '@/pages/Domestic/DomesticPlayback/DomesticPlayback';
+// Train
+import TrainPage from '@/pages/Train/Train';
 
 // Trailer
 import TrailerPage from '@/pages/Trailer/Trailer';
 // Report
 import DeliveryDistanceReportPage from '@/pages/Report/DeliveryDistanceReport/DeliveryDistanceReport';
+import DailyRouteAnalysis from '@/pages/Report/DailyRouteAnalysis/DailyRouteAnalysis'; //new Added
+import DailyRoutePlayback from '@/pages/Report/DailyRouteAnalysis/Playback/DailyRoutePlayback'; //new Added
 import IdleReportPage from '@/pages/Report/IdleReport/IdleReport';
 import DelayReportPage from '@/pages/Report/DelayReport/DelayReport';
 import ShippingArrivalReportPage from '@/pages/Report/ShippingArrivalReport/ShippingArrivalReport';
@@ -55,9 +61,10 @@ Vue.use(Router);
 
 export default new Router({
     mode: 'history',
-    routes: [{
+    routes: [
+        {
             path: '/',
-            name: 'Login',
+            name: 'login',
             component: Login,
         },
         {
@@ -69,11 +76,6 @@ export default new Router({
             path: '/resetPassword',
             name: 'ResetPassword',
             component: ResetPassword,
-        },
-        {
-            path: '/error',
-            name: 'Error',
-            component: ErrorPage,
         },
         {
             path: '/app',
@@ -127,15 +129,32 @@ export default new Router({
                     }
                 },
                 {
-                    path: 'maps/routeAnalysis',
+                    path: 'routeAnalysis',
                     name: 'RouteAnalysisPage',
                     component: RouteAnalysis,
+                },
+                
+                {
+                    path: 'routes/weather',
+                    name: 'RouteWeatherPage',
+                    component: RouteWeather,
+                },
+                //Alternate Route Page Added
+                {
+                    path: 'report/alternateRoute',
+                    name: 'AlternateRoute',
+                    component: AlternateRoute,
                 },
                 // Trailer
                 {
                     path: 'trailer',
                     name: 'TrailerPage',
                     component: TrailerPage,
+                },
+                {
+                    path: 'train',
+                    name: 'TrainPage',
+                    component: TrainPage,
                 },
                 // Genisys 
                 {
@@ -174,6 +193,17 @@ export default new Router({
                     path: 'report/deliveryDistance',
                     name: 'DeliveryDistanceReportPage',
                     component: DeliveryDistanceReportPage,
+                },
+                //Daily Route Analysis New Added
+                {
+                    path: 'report/dailyRouteAnalysis',
+                    name: 'DailyRouteAnalysis',
+                    component: DailyRouteAnalysis,
+                },
+                {
+                    path: 'report/dailyRoutePlayback',
+                    name: 'DailyRoutePlayback',
+                    component: DailyRoutePlayback,
                 },
                 {
                     path: 'report/idle',

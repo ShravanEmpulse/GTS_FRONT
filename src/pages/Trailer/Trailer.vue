@@ -106,7 +106,7 @@ export default {
       loadingLabel: 'Loading...',
       tableData: [],
       status:[],
-      trailerColumns: [ 'plate_no', 'ti_no', 'departure_date', 'eta', 'destination' , 'location', 'status' ],
+      trailerColumns: [ 'plate_no','transporter_code', 'transporter_name','ti_no', 'departure_date', 'eta', 'destination' , 'location', 'status' ],
       trailerOptions: {
         filterByColumn: true,
         perPage: 10,
@@ -114,7 +114,7 @@ export default {
         pagination: { chunk: 5, dropdown: false },
         orderBy:{ ascending:true},
         skin: 'table table-striped',
-        filterable: ['plate_no', 'ti_no', 'departure_date', 'eta', 'destination', 'location', 'status'],
+        filterable: ['plate_no', 'ti_no','transporter_code','transporter_name', 'departure_date', 'eta', 'destination', 'location', 'status'],
         texts:{
             filterBy: "Search by...",
             defaultOption: "ALL",
@@ -132,6 +132,8 @@ export default {
         'TP VENDOR': 'tp_vendor',
         'PLATE NO': 'plate_no',
         'TI NO': 'ti_no',
+        'TRANSPORTER NAME':'transporter_name',
+        'TRANSPORTER CODE':'transporter_code',
         'DEPARTURE DATE': 'departure_date',
         'DEPARTURE': 'departure',
         'ETA': 'eta', 
@@ -181,6 +183,7 @@ export default {
       .then((response) => {
         this.loadingShow = false;
         const data = response.data.resultBody;
+        console.log(response);
 
         for(let i in data){
 
@@ -189,6 +192,8 @@ export default {
               status: this.settingStatus(data[i].drivingStatus),
               tp_vendor: data[i].transporterName,
               plate_no: data[i].plateNo,
+              transporter_name:data[i].transporterName,
+              transporter_code:data[i].transporterCode,
               ti_no: data[i].tiNo,
               departure_date: data[i].departureDate,
               departure: data[i].departureName,
@@ -201,6 +206,8 @@ export default {
             this.tableData.push({
               status: this.settingStatus(data[i].drivingStatus),
               tp_vendor: data[i].transporterName,
+              transporter_name:data[i].transporterName,
+              transporter_code:data[i].transporterCode,
               plate_no: data[i].plateNo,
               ti_no: data[i].tiNo,
               departure_date: data[i].departureDate,

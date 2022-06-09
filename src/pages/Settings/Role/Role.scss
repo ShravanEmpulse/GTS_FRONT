@@ -22,3 +22,8 @@
     height: 400px;
     margin-bottom: 10px;
 }
+.vue-treeselect--has-value .vue-treeselect__multi-value {
+    margin-bottom: 5px;
+    height: 150px;
+    overflow: scroll;
+}

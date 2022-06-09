@@ -16,6 +16,7 @@
                             type="text"
                             v-model="form.id"
                             required
+                            name="ID"
                             placeholder="ID"
                             maxlength="30"
                             v-validate="'required|alpha_num'" />
@@ -29,6 +30,7 @@
                             type="password"
                             v-model="form.password"
                             required
+                            name="Password"
                             placeholder="Password"
                             maxlength="50"
                             v-validate="'required'" />
@@ -77,7 +79,7 @@ export default {
 
       this.$axios.post('/api/authentications', this.form)
       .then( (response) => {
-        // console.log(response);
+        console.log(response);
         if(response.status == '200' && response.data == ""){
           window.sessionStorage.setItem('Dorothy-Auth-Token', response.headers['dorothy-auth-token']);
           this.checkRole();
