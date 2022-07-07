@@ -656,7 +656,7 @@ export default {
           dest_name:row.destName
         })
       }
-      console.log(this.tableData);
+      console.log(this.tableData2);
     },
     getDirection(row){
       console.log(row);

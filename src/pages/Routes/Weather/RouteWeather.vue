@@ -45,10 +45,7 @@
                     placeholder="This is a placeholder"
                     >
                 </GmapAutocomplete> -->
-            <GmapMap v-bind:style="computedMapSize" :zoom="6" :center="{
-                lat: 21.207,
-                lng: 78.777
-            }" ref="map">
+            <GmapMap v-bind:style="computedMapSize" :zoom="zoom" :center="center" map-type-id="terrain" ref="map">
                 <!-- <GmapPolyline :path.sync="this.path" :options="{ strokeColor:'#E65442'}" />
                 <GmapMarker v-for="(marker, index) in markers" :key="index" :icon="marker.icon" :position="marker.latLng" :clickable="true" :title="marker.title" :plateNo="marker.plateNo" :gpsDtm="marker.gpsDtm" @click="markerClickEvent(marker,index)" />
                 <GmapInfoWindow :options="infoOptions" :position="infoWindowPos" :opened="infoWinOpen" @closeclick="infoWinOpen=false">
@@ -58,13 +55,15 @@
                 <GmapCluster :grid-size="gridSize" :styles="clusterStyles">
                     <GmapMarker v-for="(marker, index) in markers" :key="index" :icon="marker.icon" :position="marker.latLng"
                     :clickable="true" :title="marker.title" :plateNo="marker.plateNo"  @click="markerClickEvent(marker.plateNo)" />    
+                    <GmapMarker v-for="(marker, index) in markers2" :key="index" :icon="marker.icon" :position="marker.latLng"
+                    :clickable="true" :title="marker.title" />    
                 </GmapCluster>
             </GmapMap>
         </b-col>
         <b-col cols="3" class="weather-details">
             <div class="card">
                 <div class="card-header text-center">
-                    <h3>Weather in Degrees</h3>
+                    <h3>Weather in {{placeName}}</h3>
                 </div>
                 <hr>
                 <div class="card-body">
@@ -224,14 +223,49 @@ export default {
             loadingShow: false,
             loadingLabel: 'Loading...',
             /* MAP */
-            center: { lat: 21.207, lng: 78.777 },
+            center: {
+                lat: 20.5937,
+                lng: 78.9629
+            },
             zoom: 5,
             start:'',
             end:'',
             markers: [],
+            markers2: [],
             mapSize: { width: 100, heigth: 62 },
             gridSize: 60,
             paramsLatLng:{lat:'', lon:''},
+            placeName:'Degrees',
+            stateList:[
+                {lat:15.91,	lon:79.74},
+                {lat:28.21,	lon:94.72},
+                {lat:26.20,	lon:92.93},
+                {lat:25.09,	lon:85.31},
+                {lat:21.27,	lon:81.86},
+                {lat:15.29,	lon:74.12},
+                {lat:22.25, lon:71.19},
+                {lat:29.05, lon:76.08},
+                {lat:31.10, lon:77.17},
+                {lat:33.77, lon:76.57},
+                {lat:23.61,	lon:85.27},
+                {lat:15.31,	lon:75.71},
+                {lat:10.85,	lon:76.27},
+                {lat:22.97,	lon:78.65},
+                {lat:19.75,	lon:75.71},
+                {lat:24.66,	lon:93.90},
+                {lat:25.46,	lon:91.36},
+                {lat:23.16,	lon:92.93},
+                {lat:26.15,	lon:94.56},
+                {lat:20.95,	lon:85.09},
+                {lat:31.14,	lon:75.34},
+                {lat:27.02,	lon:74.21},
+                {lat:27.53,	lon:88.51},
+                {lat:11.12,	lon:78.65},
+                {lat:23.94,	lon:91.98},
+                {lat:30.06,	lon:79.01},
+                {lat:26.84,	lon:80.94},
+                {lat:22.98,	lon:87.85}
+            ],
             clusterStyles: [
                 {
                     url:require('../../../assets/svg/icn_density_lg.svg'),
@@ -350,13 +384,36 @@ export default {
         },
         setPlace(place){
             console.log(place);
+            this.placeName = place.name
             this.paramsLatLng.lat = place.geometry.location.lat();
             this.paramsLatLng.lon = place.geometry.location.lng();
             console.log(this.paramsLatLng);
+            const gmap = new google.maps;
+            console.log(gmap);
         },
         getWeatherData(){
+            this.markers2 = []
+            const position = []
             routesAxios.post('v1/api/weather/hourlyForecast',this.paramsLatLng).then((res)=>{
                 console.log(res);
+                    console.log(res);
+                    position[0] = {
+                        lat:res.data.city.coord.lat,
+                        lng:res.data.city.coord.lon,
+                    }
+                    this.markers2.push({
+                        latLng:position[0],
+                        title:res.data.list[0].weather[0].main,
+                        icon: {
+                            url: require(`../../../assets/png/icons/weather_icon${Math.floor(Math.random() * 3)+1}.png`),
+                            scaledSize: {width: 45, height: 45, f: 'px', b: 'px',},
+                        }
+                    })
+                    this.center = {
+                        lat:res.data.city.coord.lat,
+                        lng:res.data.city.coord.lon,
+                    }
+                    this.zoom = 8
             })
         },
         init(start, end){
@@ -379,6 +436,7 @@ export default {
             if (this.userRole !== "DEALER") {
               this.getShippingDeparture();
             }
+            
 
             this.timeOut = setTimeout(this.showTotalTrailer, 30*60*1000);
         },
@@ -387,6 +445,24 @@ export default {
             this.markers = [];
             this.clearSearchInput();
             this.getTransitTrailer();
+            const position = [];
+            for(let i=0;i<this.stateList.length;i++){
+                routesAxios.post('v1/api/weather/hourlyForecast',this.stateList[i]).then((res)=>{
+                    console.log(res);
+                    position[i] = {
+                        lat:this.stateList[i].lat,
+                        lng:this.stateList[i].lon,
+                    }
+                    this.markers2.push({
+                        latLng:position[i],
+                        title:res.data.list[0].weather[0].main,
+                        icon: {
+                            url: require(`../../../assets/png/icons/weather_icon${Math.floor(Math.random() * 3)+1}.png`),
+                            scaledSize: {width: 45, height: 45, f: 'px', b: 'px',},
+                        }
+                    })
+                })
+            }
             if (this.userRole !== "DEALER") {
               this.getShippingDeparture();
             }
@@ -546,8 +622,8 @@ export default {
                             });
 
                         }
-                    this.center = position[i];
-                    this.zoom = 8;
+                    // this.center = position[i];
+                    // this.zoom = 8;
                     }
 
                     if(response.data.resultBody.length == 0){

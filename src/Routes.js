@@ -5,6 +5,7 @@ import Layout from '@/components/Layout/Layout';
 
 // Dashboards
 import Dashboard from '@/pages/Dashboard/Dashboard';
+import RegionalDashboard from '@/pages/RegionalDashboard/RegionalDashboard';
 import SupervisorDashboard from '@/pages/SupervisorDashboard/SupervisorDashboard';
 // Maps
 import MapPage from '@/pages/Maps/Map/Map';
@@ -31,6 +32,7 @@ import TrailerPage from '@/pages/Trailer/Trailer';
 import DeliveryDistanceReportPage from '@/pages/Report/DeliveryDistanceReport/DeliveryDistanceReport';
 import DailyRouteAnalysis from '@/pages/Report/DailyRouteAnalysis/DailyRouteAnalysis'; //new Added
 import DailyRoutePlayback from '@/pages/Report/DailyRouteAnalysis/Playback/DailyRoutePlayback'; //new Added
+import GeoFencing from '@/pages/Report/GeoFencing/GeoFencing'; //new Added
 import IdleReportPage from '@/pages/Report/IdleReport/IdleReport';
 import DelayReportPage from '@/pages/Report/DelayReport/DelayReport';
 import ShippingArrivalReportPage from '@/pages/Report/ShippingArrivalReport/ShippingArrivalReport';
@@ -90,6 +92,20 @@ export default new Router({
                     beforeEnter: (to, from, next) => {
                         const role = window.sessionStorage.getItem('Role');
                         if (role == "ADMIN" || role == "SUPERVISOR") {
+                            return next();
+                        } else {
+                            return next('/app/accessDenied');
+                        }
+                    }
+                },
+                // REGIONAL DASHBOARD
+                {
+                    path: 'regionalDashboard',
+                    name: 'RegionalDashboard',
+                    component: RegionalDashboard,
+                    beforeEnter: (to, from, next) => {
+                        const role = window.sessionStorage.getItem('Role');
+                        if (role == "ADMIN" || role == "SUPERVISOR" || role == "DEALER") {
                             return next();
                         } else {
                             return next('/app/accessDenied');
@@ -204,6 +220,12 @@ export default new Router({
                     path: 'report/dailyRoutePlayback',
                     name: 'DailyRoutePlayback',
                     component: DailyRoutePlayback,
+                },
+                //GeoFencing
+                {
+                    path: 'report/geoFencing',
+                    name: 'GeoFencing',
+                    component: GeoFencing,
                 },
                 {
                     path: 'report/idle',

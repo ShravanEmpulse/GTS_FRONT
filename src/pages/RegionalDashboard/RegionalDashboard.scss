@@ -1,0 +1,15 @@
+.regionTableClass {
+    th {
+        color: white;
+    }
+    td:nth-child(4),
+    td:nth-child(6) {
+        text-align: center;
+    }
+    text-align: center;
+}
+// .table thead th {
+//     vertical-align: bottom;
+//     border-bottom: 2px solid #d6dee5;
+//     color: white !important;
+// }

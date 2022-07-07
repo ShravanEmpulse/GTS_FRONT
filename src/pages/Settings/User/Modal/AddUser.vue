@@ -60,6 +60,27 @@
                 {{ errors.first('dealer_Code') }}
               </span>
           </b-form-group>
+          <b-form-group
+              horizontal
+              label="DEALER REGION"
+              :label-cols="3"
+              label-breakpoint="md"
+              label-for="dealer_region"
+              v-if="user.role.value=='2'"
+            >
+              <input
+                v-validate="{  max:30, required: true, alpha_dash: true }"
+                name="dealer_region"
+                :class="{ 'form-control': true, 'is-invalid': errors.has('dealer_region')}"
+                type="text"
+                id="dealer_region"
+                data-vv-as="Dealer Region"
+                maxlength="31"
+              />
+              <span class="text-danger" v-if="errors.has('dealer_region')">
+                {{ errors.first('dealer_region') }}
+              </span>
+          </b-form-group>
           <hr>
           <b-form-group
               horizontal

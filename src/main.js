@@ -50,10 +50,11 @@ Vue.use(VueGoogleMaps, {
         libraries: 'places',
         // installComponents: true,
         // local
-        key: 'AIzaSyAjblGXuplG4T7f3iPxn5NuGulNrQisKno',
-        // key:'AIzaSyAtPIjMAMPjfVHJAgZI_8ng13s9e0LUDa0',
+        // key: 'AIzaSyAjblGXuplG4T7f3iPxn5NuGulNrQisKno',
+        key:'AIzaSyAtPIjMAMPjfVHJAgZI_8ng13s9e0LUDa0',
         //selfsigned
-        // key:'AIzaSyBsX789VROph3aBUcKDTu85QWjORappU-s'
+        // key:'AIzaSyBsX789VROph3aBUcKDTu85QWjORappU-s',
+        // key:'AIzaSyCN1xmbefR5jyL8es8he0qF_PRJcMNT7es',
         v:3.49
     },
     installComponents: true,

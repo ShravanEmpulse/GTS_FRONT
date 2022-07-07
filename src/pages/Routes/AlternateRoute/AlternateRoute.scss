@@ -1,0 +1,41 @@
+.adp-directions {
+    cursor: pointer;
+    border-collapse: collapse;
+    display: none;
+}
+#sidebar{
+    .adp{
+        display: none !important;
+    }
+}
+
+.adp-list{
+    background-color: transparent !important;
+    color: white !important;
+    min-height: 300px !important;
+    border-radius: 10px;
+}
+.adp-listsel{
+    color: black;
+    padding: 10px 0px;
+    border-radius: 0px 0px 0px 10px;
+}
+.adp-listheader{
+    font-weight: 500;
+    border-bottom: 1px solid white;
+    font-size: 16px;
+}
+
+.adp-listinfo{
+    // padding: 10px;
+}
+.routeTableClass {
+    th {
+        color: white;
+    }
+    td:nth-child(4),
+    td:nth-child(6) {
+        text-align: center;
+    }
+    text-align: center;
+}
