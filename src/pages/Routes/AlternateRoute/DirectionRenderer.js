@@ -2,6 +2,7 @@ import { MapElementFactory } from "vue2-google-maps";
 
 let data = [];
 
+
 export {
   data
 }
@@ -46,10 +47,33 @@ export default MapElementFactory({
             // eslint-disable-next-line no-debugger
             // debugger
             directionsRenderer.setDirections(response);
+            directionsRenderer.setOptions({polylineOptions:{strokeOpacity: 0.6,
+              strokeColor: 'blue',strokeWeight: 8,}});
             
             console.log(response);
             
+            let getDirection = (r) => {
+              console.log(r);
+              // var directionsRenderer1 = new google.maps.DirectionsRenderer({
+              //   directions: r,
+              //   routeIndex: 1,
+              //   map: directionsRenderer.map,
+              //   polylineOptions: {
+              //     strokeColor: "gray"
+              //   }
+              // });
+              // console.log("routeindex1 = ", directionsRenderer1.getRouteIndex());
             
+              // var directionsRenderer2 = new google.maps.DirectionsRenderer({
+              //   directions: r,
+              //   routeIndex: 2,
+              //   map: directionsRenderer.map,
+              //   polylineOptions: {
+              //     strokeColor: "gray"
+              //   }
+              // });
+              // console.log("routeindex2 = ", directionsRenderer2.getRouteIndex()); //line
+            }
             console.log(data);
             console.log(directionsRenderer);
             for (var i = 0, len = response.routes.length; i < len; i++) {
@@ -58,6 +82,7 @@ export default MapElementFactory({
                     routeIndex: i,
                     strokeColor:"red"
                 });
+                getDirection(response);
                 data.push({
                   s_no:i+1,
                   distance:response.routes[i].legs[0].distance.text,

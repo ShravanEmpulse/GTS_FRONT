@@ -1,14 +1,27 @@
 <template>
-    <div class="dynamic-tables">
-        <h4 class="page-title">    
-            <span>Primary Movements</span>    
-        </h4> 
+    <div class="dynamic-tables mt-3">
+        
         <Widget
-        title="<h4></h4>"
+        title="<h4 class='text-center'><b>Primary Movements</b></h4>"
         customHeader
         >
         <div class="widget-middle-overflow">
-
+            <b-row>
+              <b-col cols="4 offset-4 mt-2" class="primaryBorder">
+                <div class="movements">    
+                  <div class="badgeClass">
+                    <i class="fa fa-industry" aria-hidden="true"></i>
+                    <span class="badge badge-light">FACTORY</span>
+                  </div>
+                  <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+                  <div class="badgeClass">
+                    <span class="badge badge-light">TRAIN</span>
+                    <i class="fa fa-train"></i>
+                  </div>
+                </div> 
+              </b-col>
+            </b-row>
+            <hr class="bg-light">
             <div class="export-button">
             <download-excel
                 class   = "btn btn-outline-default"
@@ -201,12 +214,12 @@
       trainColumns: [ 'plate_no','departure_date','eta','destination', 'current_location' , 'lot_no','fnr_no', 'status', 'action' ],
       trainOptions: {
         filterByColumn: true,
-        perPage: 10,
+        perPage: 5,
         perPageValues: [],
         pagination: { chunk: 5, dropdown: false },
         orderBy:{ ascending:true},
         skin: 'table table-striped',
-        filterable: ['plate_no','departure_date','eta','destination', 'current_location', 'status' , 'lot_no'],
+        filterable: ['plate_no','departure_date','eta','destination', 'current_location', 'status' , 'lot_no','fnr_no'],
         texts:{
             filterBy: "Search by...",
             defaultOption: "ALL",
@@ -250,7 +263,8 @@
     };
   },
   created() {
-    // this.getTrainInfo(); 
+    // this.getTrainInfo();
+    this.$emit('getPrimaryData',this.tableData)
   },
   mounted(){
      if(this.$route.params.status){
@@ -430,4 +444,33 @@
 
 <style lang="scss" scoped>
 
+.primaryBorder{
+    border: 2px solid white;
+    padding: 6px 19px;
+    border-radius: 30px;
+  .movements{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      img{
+        height: 50px;
+        width: 50px;
+      }
+      i{
+        font-size: 30px;
+      }
+    }
+}
+.badge{
+  font-size: small;
+}
+.badgeClass{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  span{
+    margin: 10px;
+  }
+}
 </style>

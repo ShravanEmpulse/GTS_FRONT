@@ -1,14 +1,27 @@
 <template>
-    <div class="dynamic-tables">
-        <h4 class="page-title mt-3">    
-      <span>Secondary Movements</span>    
-    </h4> 
+    <div class="dynamic-tables mt-3">
+        
     <Widget
-      title="<h4></h4>"
+      title="<h4 class='text-center'><b>Secondary Movements</b></h4>"
       customHeader
       >
       <div class="widget-middle-overflow">
-
+        <b-row>
+              <b-col cols="4 offset-4 mt-2" class="primaryBorder">
+                <div class="movements">    
+                  <div class="badgeClass">
+                    <i class="fa fa-train"></i>
+                    <span class="badge badge-light">TRAIN</span>
+                  </div>
+                  <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>
+                  <div class="badgeClass">
+                    <span class="badge badge-light">DEALER'S</span>
+                    <i class="fa fa-users"></i>
+                  </div>
+                </div> 
+              </b-col>
+            </b-row>
+            <hr class="bg-light">
         <div class="export-button">
           <download-excel
             class   = "btn btn-outline-default"
@@ -72,7 +85,7 @@
               </thead>
               <tbody>
                 <tr v-for="(t,i) in secondaryTableData" :key="i">
-                  <td><i class="fa fa-car"/></td>
+                  <td><i class="la la-truck text-dark fa-2x"/></td>
                   <td>{{t.plateNo}}</td>
                   <td>{{t.dealerCode}}</td>
                   <td>{{t.secondaryLotNo}}</td>
@@ -159,32 +172,51 @@
         destination:"",
         noOfCars:""
       },
-      secondaryTableData:[],
+      secondaryTableData:[
+        {
+          plateNo:"AP25BN5555",
+          dealerCode:"AP12145895",
+          secondaryLotNo:"LOT12312345",
+          destination:"pune",
+          noOfCars:"6"
+        },
+        {
+          plateNo:"AP25BN1111",
+          dealerCode:"AP12141111",
+          secondaryLotNo:"LOT12311111",
+          destination:"delhi",
+          noOfCars:"8"
+        },
+        {
+          plateNo:"AP25BN2222",
+          dealerCode:"AP12142222",
+          secondaryLotNo:"LOT12312222",
+          destination:"mumbai",
+          noOfCars:"10"
+        },
+      ],
       tableData1: [
         {
               departure_date:"10 june, 2022",
               eta:"17 june, 2022",
               final_destination:"Delhi,Railway Station",
-              lot_no:"DN1234567894",
               fnr_no:"FN2021"
         },
         {
               departure_date:"10 june, 2022",
               eta:"17 june, 2022",
               final_destination:"Mumbai,Railway Station",
-              lot_no:"DN1234567894",
               fnr_no:"FN2022"
         },
         {
               departure_date:"10 june, 2022",
               eta:"17 june, 2022",
               final_destination:"Kolkata,Railway Station",
-              lot_no:"DN1234567894",
               fnr_no:"FN2023"
         },
       ],
       status:[],
-      trainColumns1: ['lot_no','departure_date','eta','final_destination' ,'action' ],
+      trainColumns1: ['fnr_no','departure_date','eta','final_destination' ,'action' ],
       trainOptions1: {
         filterByColumn: true,
         perPage: 10,
@@ -192,7 +224,7 @@
         pagination: { chunk: 5, dropdown: false },
         orderBy:{ ascending:true},
         skin: 'table table-striped',
-        filterable: ['lot_no','departure_date','eta','final_destination' , 'action' ],
+        filterable: ['fnr_no','departure_date','eta','final_destination' , 'action' ],
         texts:{
             filterBy: "Search by...",
             defaultOption: "ALL",
@@ -411,5 +443,60 @@
 </script>
 
 <style lang="scss" scoped>
+  .invoice {
+    height: 235px;
+    overflow-y: scroll;
+  }
+  /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #4e85bd; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.primaryBorder{
+    border: 2px solid white;
+    padding: 6px 19px;
+    border-radius: 30px;
+  .movements{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      i{
+        font-size: 30px;
+      }
+    }
+}
+.badge{
+  font-size: small;
+}
+.badgeClass{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  span{
+    margin: 10px;
+  }
+}
+.fa-industry,.fa-train{
+  // border: 1px solid white;
+  // border-radius: 50%;
+  // padding: 10px;
+}
 </style>

@@ -105,7 +105,7 @@ export default new Router({
                     component: RegionalDashboard,
                     beforeEnter: (to, from, next) => {
                         const role = window.sessionStorage.getItem('Role');
-                        if (role == "ADMIN" || role == "SUPERVISOR" || role == "DEALER") {
+                        if (role == "ADMIN" || role == "SUPERVISOR") {
                             return next();
                         } else {
                             return next('/app/accessDenied');

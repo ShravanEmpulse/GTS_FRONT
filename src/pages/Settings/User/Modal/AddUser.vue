@@ -75,6 +75,7 @@
                 type="text"
                 id="dealer_region"
                 data-vv-as="Dealer Region"
+                v-model="userEnrollments.region"
                 maxlength="31"
               />
               <span class="text-danger" v-if="errors.has('dealer_region')">
@@ -245,6 +246,7 @@ export default {
       userEnrollments: {
          companyId: '',
          dealerCode: '',
+         region:''
       },
 
       isDuplicated:null,

@@ -126,7 +126,7 @@ export default {
         });
       }else if(role == "DEALER" || role == "USER" || role == "KMI_USER"){
         this.$router.push({
-          name: 'RegionalDashboard',
+          name: 'MapPage',
         });
       }else if( role == "DOMESTIC" || role == "DOMESTIC USER" ) {
         this.$router.push({

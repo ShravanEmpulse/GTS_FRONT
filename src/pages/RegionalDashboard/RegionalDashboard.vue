@@ -4,7 +4,7 @@
             <b-col cols="6">
                 <h3>Regional Dashboard</h3>
             </b-col>
-            <b-col cols="3 offset-3" v-if="showSelection">
+            <!-- <b-col cols="3 offset-3">
                 <b-input-group prepend="Select Region">
                     <b-input-group-append>
                         <b-form-select
@@ -14,10 +14,10 @@
                         ></b-form-select>
                     </b-input-group-append>
                 </b-input-group>
-            </b-col>
+            </b-col> -->
         </b-row>
         <b-row class="mt-3">
-            <b-col cols="2">
+            <b-col cols="3">
                 <Widget customHeader>   
                     <h6> Region </h6>
                     <hr class="count-hr">   
@@ -27,7 +27,7 @@
                     </span>   
                 </Widget>
             </b-col>
-            <b-col cols="2">
+            <!-- <b-col cols="2">
                 <Widget customHeader>   
                     <h6> Total </h6>
                     <hr class="count-hr">   
@@ -36,8 +36,8 @@
                             &nbsp; <animated-number :value="dashboardCount.totalCount" :formatValue="formatCount" :duration="1000" :delay="0" />    
                         </span>    
                 </Widget>
-            </b-col>
-            <b-col lg="2">    
+            </b-col> -->
+            <b-col lg="3">    
                 <Widget customHeader>   
                     <h6> Transit </h6>
                     <hr class="count-hr">   
@@ -47,7 +47,7 @@
                         </span>  
                 </Widget>
             </b-col>
-            <b-col lg="2">    
+            <b-col lg="3">    
                 <Widget customHeader>   
                     <h6> Arrival </h6>
                     <hr class="count-hr">   
@@ -57,7 +57,7 @@
                         </span>  
                 </Widget>
             </b-col>
-            <b-col lg="4">    
+            <b-col lg="3">    
                 <Widget customHeader>   
                     <h6> Delay </h6>
                     <hr class="count-hr">   
@@ -80,7 +80,49 @@
         </b-row>
         <h4 class="mt-3">{{search_selected}} Region</h4>
         <b-row>
-            <b-col cols="12 mt-3">
+            <b-col cols="3" style="display: grid">
+                <button @click="changeData('All')" class="btn btn-outline-default" :class="{ active: isActiveAll }">
+                    <h5 style="font-weight:600;">
+                        ALL
+                        <span v-if="isActiveAll" class="badge badge-success">Active</span>
+                    </h5>
+                </button>
+            </b-col>
+            <b-col cols="2 offset-1" style="display: grid">
+                <button @click="changeData('East')" class="btn btn-outline-default" :class="{ active: isActiveEast }">
+                    <h5 style="font-weight:600;">
+                        EAST
+                        <span v-if="isActiveEast" class="badge badge-success">Active</span>
+                    </h5>
+                </button>
+            </b-col>
+            <b-col cols="2" style="display: grid">
+                <button @click="changeData('West')" class="btn btn-outline-default" :class="{ active: isActiveWest }">
+                    <h5 style="font-weight:600;">
+                        WEST
+                        <span v-if="isActiveWest" class="badge badge-success">Active</span>
+                    </h5>
+                </button>
+            </b-col>
+            <b-col cols="2" style="display: grid">
+                <button @click="changeData('North')" class="btn btn-outline-default" :class="{ active: isActiveNorth }">
+                    <h5 style="font-weight:600;">
+                        NORTH
+                        <span v-if="isActiveNorth" class="badge badge-success">Active</span>
+                    </h5>
+                </button>
+            </b-col>
+            <b-col cols="2" style="display: grid">
+                <button @click="changeData('South')" class="btn btn-outline-default" :class="{ active: isActiveSouth}">
+                    <h5 style="font-weight:600;">
+                        SOUTH
+                        <span v-if="isActiveSouth" class="badge badge-success">Active</span>
+                    </h5>
+                </button>
+            </b-col>
+        </b-row>
+        <b-row>
+            <b-col cols="12">
                 <v-client-table
                     class="regionTableClass card"
                     ref="regionData"
@@ -105,22 +147,27 @@
                 dashboardCount: [],
                 delayDetail: [],
                 tableData:[],
-                showSelection:true,
+                // showSelection:true,
                 tableColumns:[
                     "state",
                     "transit",
                     "arrival",
                     "delay"
                 ],
+                isActiveAll:true,
+                isActiveEast:false,
+                isActiveWest:false,
+                isActiveNorth:false,
+                isActiveSouth:false,
                 search_selected: "All",
-                search_options: [
-                    { value: "All", text: "All" },
-                    // { value: "Central", text: "Central" },
-                    { value: "East", text: "East" },
-                    { value: "West", text: "West" },
-                    { value: "North", text: "North" },
-                    { value: "South", text: "South" },
-                ],
+                // search_options: [
+                //     { value: "All", text: "All" },
+                //     // { value: "Central", text: "Central" },
+                //     { value: "East", text: "East" },
+                //     { value: "West", text: "West" },
+                //     { value: "North", text: "North" },
+                //     { value: "South", text: "South" },
+                // ],
                 tableOptions: {
                     filterByColumn: true,
                     perPage: 10,
@@ -173,18 +220,23 @@
         created(){
             this.dashboardGetCount();
             this.dashboardGetDelay();
-            const role = window.sessionStorage.getItem('Role');
-            console.log(role);
-            if(role == "DEALER"){
-                this.showSelection = false ;
-                this.search_selected = "East"
-            }else{
-                this.showSelection = true ;
-                this.search_selected = "All"
-            }
+            // const role = window.sessionStorage.getItem('Role');
+            // console.log(role);
+            // if(role == "DEALER"){
+            //     this.showSelection = false ;
+            //     this.search_selected = "East"
+            // }else{
+            //     this.showSelection = true ;
+            //     this.search_selected = "All"
+            // }
+            this.isActiveAll=true;
+            this.isActiveEast=false;
+            this.isActiveWest=false;
+            this.isActiveNorth=false;
+            this.isActiveSouth=false;
             console.log(this.search_selected);
-            for(let i=0; i<this.state.length; i++){
-                if( this.state[i].region == this.search_selected){
+            if(this.search_selected == "All"){
+                for(let i=0; i<this.state.length; i++){
                         this.tableData.push({
                             state:this.state[i].name,
                             transit:this.state[i].transit,
@@ -236,6 +288,65 @@
                         })
                     }
                     if(this.search_selected && value === "All"){
+                        this.tableData.push({
+                            state:this.state[i].name,
+                            transit:this.state[i].transit,
+                            arrival:this.state[i].arrival,
+                            delay:this.state[i].delay
+                        })
+                    }
+                }
+            },
+            changeData(e){
+                console.log(e);
+                this.search_selected = e;
+                if(e == "All"){
+                    this.isActiveAll=true;
+                    this.isActiveEast=false;
+                    this.isActiveWest=false;
+                    this.isActiveNorth=false;
+                    this.isActiveSouth=false;
+                }
+                if(e == "East"){
+                    this.isActiveAll=false;
+                    this.isActiveEast=true;
+                    this.isActiveWest=false;
+                    this.isActiveNorth=false;
+                    this.isActiveSouth=false;
+                }
+                if(e == "West"){
+                    this.isActiveAll=false;
+                    this.isActiveEast=false;
+                    this.isActiveWest=true;
+                    this.isActiveNorth=false;
+                    this.isActiveSouth=false;
+                }
+                if(e == "North"){
+                    this.isActiveAll=false;
+                    this.isActiveEast=false;
+                    this.isActiveWest=false;
+                    this.isActiveNorth=true;
+                    this.isActiveSouth=false;
+                }
+                if(e == "South"){
+                    this.isActiveAll=false;
+                    this.isActiveEast=false;
+                    this.isActiveWest=false;
+                    this.isActiveNorth=false;
+                    this.isActiveSouth=true;
+                }
+                this.tableData=[]
+                for(let i=0; i< this.state.length; i++){
+                    if(this.state[i].region === e){
+                        // console.log(this.state[i]);
+                        this.tableData.push({
+                            state:this.state[i].name,
+                            transit:this.state[i].transit,
+                            arrival:this.state[i].arrival,
+                            delay:this.state[i].delay
+                        })
+                    }
+                    if(this.search_selected && e === "All"){
                         this.tableData.push({
                             state:this.state[i].name,
                             transit:this.state[i].transit,
@@ -310,6 +421,15 @@
     background: transparent;
     color: white;
     border: none;
+}
+.btn{
+    border-radius: 0.3rem 0.3rem 0rem 0rem !important;
+    z-index: 10000 !important;
+}
+
+.regionTableClass {
+    border-top: 1px solid;
+    border-radius: 0px 0px 5px 5px;
 }
 </style>
 <style src="./RegionalDashboard.scss" lang="scss" />
