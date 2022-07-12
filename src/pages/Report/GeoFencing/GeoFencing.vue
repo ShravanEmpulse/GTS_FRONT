@@ -404,7 +404,7 @@ export default {
       this.tableData = [];
       console.log(event);
       // setInterval(this.greetings, 200);
-      let rad = 100000;
+      // let rad = 100000;
       // setInterval(()=>{
       //     if(rad <= 200000){
       //         rad += 10000
