@@ -376,6 +376,17 @@ export default {
 
             };
           }
+          if(SearchOption === 'States'){
+              return {
+              pageSize:2,
+              sortBy:'ASC',
+              page:0,
+              stateName:SearchInput,
+              startDate:startDate,
+              endDate:endDate,
+
+            };
+          }
         },
          requestFunction: (data) => {
           //  console.log(this.start);

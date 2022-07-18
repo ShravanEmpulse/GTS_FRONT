@@ -34,7 +34,11 @@
                         </download-excel>
                         </div>
             <v-client-table class="trainTableClass" ref="trainTable" :data="tableData" :columns="trainColumns" :options="trainOptions">
-                <b-button slot="action" slot-scope="props" class="btn-outline-default" @click="getTrainData(props.row,props.index)" v-b-modal.secondary >View <i class="fa fa-eye" aria-hidden="true"></i></b-button>
+                <div slot="action" slot-scope="props">
+                  <b-button class="btn-outline-default" @click="getTrainData(props.row,props.index)" v-b-modal.secondary >View <i class="fa fa-eye" aria-hidden="true"></i></b-button>
+                <b-button class="btn-outline-default mx-2" @click="getDirection(props.row,props.index)" > <i class="fa fa-location-arrow" aria-hidden="true"></i></b-button>
+                </div>
+                 <b-button slot="status" slot-scope="props" :variant="props.row.status[0].type" class="train-status-badge" >{{props.row.status[0].title}}</b-button>
             </v-client-table>
         </div>
       </Widget>
@@ -106,6 +110,7 @@ export default {
               eta:"11 june, 2022",
               destination:"Bangalore,Railway Station",
               current_location:"Bangalore",
+              status:this.settingStatus(1)
         },
         {
               fnr_no:"FN2021",
@@ -113,6 +118,7 @@ export default {
               eta:"11 june, 2022",
               destination:"Bangalore,Railway Station",
               current_location:"Bangalore",
+              status:this.settingStatus(2)
         },
         {
               fnr_no:"FN2022",
@@ -120,12 +126,13 @@ export default {
               eta:"11 june, 2022",
               destination:"Bangalore,Railway Station",
               current_location:"Bangalore",
+              status:this.settingStatus(1)
         },
       ],
       status:[],
       trainInfo:[],
       trainTableData:[],
-      trainColumns: ['fnr_no','departure_date','eta','destination', 'current_location' , 'action' ],
+      trainColumns: ['fnr_no','departure_date','eta','destination', 'current_location' ,'status', 'action' ],
       trainOptions: {
         filterByColumn: true,
         perPage: 5,
@@ -133,7 +140,7 @@ export default {
         pagination: { chunk: 5, dropdown: false },
         orderBy:{ ascending:true},
         skin: 'table table-striped',
-        filterable: ['departure_date','eta','destination', 'current_location','fnr_no'],
+        filterable: ['departure_date','eta','destination', 'current_location','fnr_no', 'status'],
         texts:{
             filterBy: "Search by...",
             defaultOption: "ALL",
@@ -176,6 +183,27 @@ export default {
     }
   },
   methods:{
+    getDirection(r,i){
+      console.log("direction button clicked");
+      this.$root.$router.push({name:'TrainPlayback'})
+    },
+    settingStatus(drivingStatus){
+
+      this.status=[];
+
+       if(drivingStatus == '1'){
+          this.status.push({
+            type: 'primary',
+            title: 'TRANSIT'
+          })
+      }else if(drivingStatus == '2'){
+          this.status.push({
+            type: 'success',
+            title: 'ARRIVAL'
+          })
+      }
+      return this.status;
+    },
     getTrainData(r,i){
         console.log(r);
         this.trainInfo = [];
@@ -192,7 +220,7 @@ export default {
                 departure_date: this.data[i].departure_date,
                 lot_no: this.data[i].lot_no,
                 plate_no: this.data[i].plate_no,
-                status:this.data[i].status[0],
+                status:r.status[0],
               })
           }
         }

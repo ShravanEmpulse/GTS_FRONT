@@ -187,17 +187,8 @@
               destination:"Bangalore,Railway Station",
               current_location:"Bangalore",
               lot_no:"DN1234567894",
-              fnr_no:"FN2022"
-        },
-        {
-              status: this.settingStatus(3),
-              plate_no:"AP29KJ5689",
-              departure_date:"10 june, 2022",
-              eta:"11 june, 2022",
-              destination:"Bangalore,Railway Station",
-              current_location:"Bangalore",
-              lot_no:"DN1234567894",
-              fnr_no:"FN2022"
+              fnr_no:"FN2022",
+              dealer_code:"AP10P1013"
         },
         {
               status: this.settingStatus(1),
@@ -207,11 +198,23 @@
               destination:"Bangalore,Railway Station",
               current_location:"Bangalore",
               lot_no:"DN1234567894",
-              fnr_no:"FN2022"
+              fnr_no:"FN2022",
+              dealer_code:"AP10P1013"
+        },
+        {
+              status: this.settingStatus(1),
+              plate_no:"AP29KJ5689",
+              departure_date:"10 june, 2022",
+              eta:"11 june, 2022",
+              destination:"Bangalore,Railway Station",
+              current_location:"Bangalore",
+              lot_no:"DN1234567894",
+              fnr_no:"FN2022",
+              dealer_code:"AP10P1013"
         },
       ],
       status:[],
-      trainColumns: [ 'plate_no','departure_date','eta','destination', 'current_location' , 'lot_no','fnr_no', 'status', 'action' ],
+      trainColumns: [ 'plate_no','dealer_code','departure_date','eta','destination', 'current_location' , 'lot_no','fnr_no', 'status', 'action' ],
       trainOptions: {
         filterByColumn: true,
         perPage: 5,
@@ -368,12 +371,7 @@
 
       this.status=[];
 
-      if(drivingStatus == '0'){
-          this.status.push({
-            type: 'default',
-            title: 'NONE'
-          })
-      }else if(drivingStatus == '1'){
+       if(drivingStatus == '1'){
           this.status.push({
             type: 'primary',
             title: 'TRANSIT'
@@ -382,23 +380,6 @@
           this.status.push({
             type: 'success',
             title: 'ARRIVAL'
-          })
-      }else if(drivingStatus == '3'){
-          this.status.push({
-            type: 'info',
-            title: 'IDLE'
-          })
-      }
-      else if(drivingStatus == '4'){
-          this.status.push({
-            type: 'danger',
-            title: 'DELAY'
-          })
-      }
-      else if(drivingStatus == '5'){
-          this.status.push({
-            type: 'warning',
-            title: 'STANDBY'
           })
       }
       return this.status;

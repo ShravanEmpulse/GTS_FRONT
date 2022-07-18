@@ -25,6 +25,7 @@ import DomesticTrailerPage from '@/pages/Domestic/DomesticTrailer/DomesticTraile
 import DomesticPlaybackPage from '@/pages/Domestic/DomesticPlayback/DomesticPlayback';
 // Train
 import TrainPage from '@/pages/Train/Train';
+import TrainPlayback from '@/pages/Train/TrainMovements/TrainPlayback';
 
 // Trailer
 import TrailerPage from '@/pages/Trailer/Trailer';
@@ -171,6 +172,11 @@ export default new Router({
                     path: 'train',
                     name: 'TrainPage',
                     component: TrainPage,
+                },
+                {
+                    path: 'train/trainPlayback',
+                    name: 'TrainPlayback',
+                    component: TrainPlayback,
                 },
                 // Genisys 
                 {

@@ -39,8 +39,6 @@ export default MapElementFactory({
             destination,
             travelMode,  
             provideRouteAlternatives: true,
-            unitSystem: google.maps.UnitSystem.METRIC,
-            avoidTolls: false
           },
           (response, status) => {
             if (status !== "OK") return;

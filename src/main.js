@@ -52,6 +52,7 @@ Vue.use(VueGoogleMaps, {
         // local
         // key: 'AIzaSyAjblGXuplG4T7f3iPxn5NuGulNrQisKno',
         key:'AIzaSyAtPIjMAMPjfVHJAgZI_8ng13s9e0LUDa0',
+        // key: process.env.GOOGLE_MAP_API_KEY,
         //selfsigned
         // key:'AIzaSyBsX789VROph3aBUcKDTu85QWjORappU-s',
         // key:'AIzaSyCN1xmbefR5jyL8es8he0qF_PRJcMNT7es',

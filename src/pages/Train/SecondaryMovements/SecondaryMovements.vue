@@ -77,7 +77,6 @@
                   <th>#</th>
                   <th>PLATE NO</th>
                   <th>DEALER CODE</th>
-                   <th>SECONDARY LOT NO.</th>
                   <th>DESTINATION</th>
                   <th>NO. OF CARS</th>
                   <th>ACTION</th>
@@ -88,7 +87,6 @@
                   <td><i class="la la-truck text-dark fa-2x"/></td>
                   <td>{{t.plateNo}}</td>
                   <td>{{t.dealerCode}}</td>
-                  <td>{{t.secondaryLotNo}}</td>
                   <td>{{t.destination}}</td>
                   <td>{{t.noOfCars}}</td>
                   <td>
@@ -176,14 +174,12 @@
         {
           plateNo:"AP25BN5555",
           dealerCode:"AP12145895",
-          secondaryLotNo:"LOT12312345",
           destination:"pune",
           noOfCars:"6"
         },
         {
           plateNo:"AP25BN1111",
           dealerCode:"AP12141111",
-          secondaryLotNo:"LOT12311111",
           destination:"delhi",
           noOfCars:"8"
         },
